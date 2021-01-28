@@ -3,21 +3,19 @@ class User < ApplicationRecord
 	has_many :posts
 	has_many :comments
 
-	# validates :user_name, presence: {message: "presence"}, uniqueness: {message: "uniqueness"}
+	#validates :user_name, presence: {message: "presence"}, uniqueness: {message: "uniqueness"}
 
-	validate :indian_mobile_no
+	#validate :indian_mobile_no
+	#validates_format_of :user_name, :with =>  /\d[0-9]\)*\z/ , :message => "Only positive number without spaces are allowed"
 
 
-	def user_ki_method 
-		indian_mobile_no
-	end
-	# after_create :register_in_markating_module
+	after_create :register_in_markating_module
 	# after_update :register_in_markating_module
 	#after_save :register_in_markating_module
 
-	# def register_in_markating_module
-	# 	Subscription.create(user_id: self.id)
-	# end
+	def register_in_markating_module
+		Subscription.create(user_id: id)
+	end
 
 	#before_create :uniq_user_name
 	#before_update :uniq_user_name
@@ -27,9 +25,10 @@ class User < ApplicationRecord
 	# 	User.where(user_name: self.user_name).present?
 	# end
 
-	private
 
+	private
 	def indian_mobile_no
-		user_name.include?("+91")
+	   user_name.include?("+91")
 	end
+
 end
