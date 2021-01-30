@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
 	#validates :user_name, presence: {message: "presence"}, uniqueness: {message: "uniqueness"}
 
-	#validate :indian_mobile_no
+	validate :indian_mobile_no
 	#validates_format_of :user_name, :with =>  /\d[0-9]\)*\z/ , :message => "Only positive number without spaces are allowed"
 
 
@@ -28,7 +28,8 @@ class User < ApplicationRecord
 
 	private
 	def indian_mobile_no
-	   user_name.include?("+91")
+	  (user_name.include?("+91"))
 	end
-
 end
+	  
+
