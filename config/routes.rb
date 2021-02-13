@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   	collection do
   		post :handle_request
   	end
+    member do
+      get :sub_categories
+    end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

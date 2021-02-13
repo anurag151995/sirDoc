@@ -1,0 +1,5 @@
+
+<% @sub_categories.each do |y| %>
+    &nbsp;&nbsp;&nbsp;&nbsp;<label><%=y.name%></label>
+   <%= check_box_tag 'sub_category[]', y.name , false , {class: "sub_category"} %><br>
+<% end %>

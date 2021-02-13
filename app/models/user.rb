@@ -18,7 +18,7 @@ class User < ApplicationRecord
 	# end
 
 	#before_create :uniq_user_name
-	#before_update :uniq_user_name
+	#before_update :uniq_user_name	
 	before_save :uniq_user_name
 
 	def uniq_user_name
@@ -31,6 +31,10 @@ class User < ApplicationRecord
 	def indian_mobile_no
 	  (user_name.include?("+91"))
 	end
+
+	class User
+      scope :with_long_title, -> { where("LENGTH(user_name) > 5") }
+    end
 end
 	  
 
