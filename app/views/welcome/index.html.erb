@@ -1,9 +1,68 @@
-<!DOCTYPE html>
-<html>
-<body>
+<%= form_tag charges_path do %>
+  <!-- <article>
+    <%# if flash[:error].present? %>
+      <div id="error_explanation">
+        <p><%#= flash[:error] %></p>
+      </div>
+    <#% end %>
+    <label class="amount">
+      <span>Amount: $5.00</span>
+    </label>
+  </article>
 
-<h2>Welcome....</h2>
 
 
-</body>
-</html>
+  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="pk_test_cAnTXFMsx0UrHalq5oxKlv8C" data-description="Anand test vendor" data-amount="50000" data-redirect-url='http://localhost:3000/custom_charges' data-locale="auto"></script><br> -->
+
+
+
+
+
+
+
+
+  <%#Category::NAME.each_with_index do |x, i|%>
+ <!--    <label><%#=x[0]%></label>
+    <%#= check_box_tag 'category[]', (x[1].is_a?(Hash) ? x[1].first[0] : x[1]), false, {class: "category_#{i}", data: {x1: x[0], x2: x[1].first[0]}}%><br>
+    <%# if x[1].is_a?(Hash) %>
+      <%# x[1].values[0].each do |y| %>
+        &nbsp;&nbsp;&nbsp;&nbsp;<label><%#=y[0]%></label>
+        <%#= check_box_tag 'sub_category[]', y[1] , false , {class: "sub_category", data: {id: i}}%><br>
+      <%# end %>
+    <%# end %>
+  <%# end %>
+  <%#= submit_tag 'Save' %>
+<%# end %> -->
+
+
+<!-- <script type="text/javascript">
+  $(document).on("change", ".sub_category", function(){
+    var id = $(this).data("id");
+    $(".category_"+id).prop('checked', true);
+  })
+</script> -->
+
+
+<%Category.all.each do |x|%>
+    <label><%=x.name%></label>
+    <%= check_box_tag 'category[]', x.name, false, {class: "category", data: {id: x.id}}%><br>
+    <div id="sub_category_div_<%=x.id%>"></div>
+  <% end %>
+  <%= submit_tag 'Save' %>
+<% end %>
+
+<script type="text/javascript">
+  $(document).on("change", ".category", function(){
+    var id = $(this).data("id");
+    
+    $.ajax({
+      url: "/stripe_webhooks/"+id+"/sub_categories",
+      type: "get",
+      data: "",
+      success: function(data) {
+        // $("#sub_category_div_"+data.id)
+      },
+      error: function(data) {}
+    })
+  })
+</script>
