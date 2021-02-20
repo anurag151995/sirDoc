@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_13_054201) do
+ActiveRecord::Schema.define(version: 2021_02_20_070335) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -38,6 +38,13 @@ ActiveRecord::Schema.define(version: 2021_02_13_054201) do
   create_table "kyc_details", force: :cascade do |t|
     t.string "id_proof"
     t.string "address_proof"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "post_id"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

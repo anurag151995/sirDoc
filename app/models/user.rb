@@ -1,6 +1,7 @@
 class User < ApplicationRecord
 	has_one :kyc_detail
 	has_many :posts
+	has_many :likes
 	has_many :comments
 
 	#validates :user_name, presence: {message: "presence"}, uniqueness: {message: "uniqueness"}
@@ -32,9 +33,9 @@ class User < ApplicationRecord
 	  (user_name.include?("+91"))
 	end
 
-	class User
-      scope :with_long_title, -> { where("LENGTH(user_name) > 5") }
-    end
+	# class User
+ #      scope :with_long_title, -> { where("LENGTH(user_name) > 5") }
+ #    end
 end
 	  
 

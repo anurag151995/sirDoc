@@ -1,0 +1,26 @@
+<table>
+  <tr>
+    <th>Post</th>
+    <th>Comments</th>
+    <th>Likes</th>
+    <th>Number of Likes</th>
+  </tr>
+	<% @posts.each do |post| %>
+		<tr>
+	    <td><%= post.content %></td>
+	    <td>
+	    	<% post.comments.each do |c| %>
+	    		<%= c.content %>
+	    	<% end %>
+	    </td>
+	    <td>
+	    	<%= form_with url: likes_path, method: :post do |f| %>
+	    		<%= f.hidden_field :user_id, value: User.first.id %>
+	    		<%= f.hidden_field :post_id, value: post.id %>
+	    		<%= f.submit "Like" %>
+	    	<%end %>
+	    </td>
+	    	<td id="likes_<%=post.id%>"><%= render partial: "likes/likes_count", locals: {post: post} %></td>
+		</tr>
+	<% end %>
+</table>

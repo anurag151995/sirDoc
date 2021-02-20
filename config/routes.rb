@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   get 'welcome/index'
-  root 'welcome#index'
+  root 'posts#index'
   resources :charges
+  resources :likes
   resources :custom_charges
   resources :stripe_webhooks do
   	collection do
