@@ -6,8 +6,8 @@ class StripeWebhooksController < ApplicationController
 	end
 
   def sub_categories
-  	@id = params[:id]
+	@id = params[:id]
   	@sub_categories = SubCategory.where(category_id: params[:id])
-  	# render json: {sub_categories: @sub_categories, id: @id, status: 200}
+  	#render json: {sub_categories: @sub_categories, id: @id, status: 200}
   end
 end
